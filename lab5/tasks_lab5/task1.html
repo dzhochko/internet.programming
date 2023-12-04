@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Vertical Menu</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #222;
+			color: #fff;
+		}
+
+		.menu {
+			width: 250px;
+			background-color: #333;
+			padding: 10px;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.main-menu li {
+			margin-bottom: 10px;
+			position: relative;
+		}
+
+		.main-menu a {
+			display: block;
+			text-decoration: none;
+			color: #fff;
+			padding: 8px 15px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		.main-menu a:hover {
+			background-color: #444;
+		}
+
+		.submenu {
+			display: none;
+			background-color: #444;
+			position: absolute;
+			top: 0;
+			left: 100%;
+			padding: 0;
+			min-width: 200px;
+		}
+
+		.submenu li {
+			margin: 0;
+		}
+
+		.submenu a {
+			padding: 8px 25px;
+			display: block;
+			color: #fff;
+		}
+
+		.submenu a:hover {
+			background-color: #555;
+		}
+
+		.submenu-item:hover>.submenu {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="menu">
+		<ul class="main-menu">
+			<li><a href="#">Home</a></li>
+			<li class="submenu-item">
+				<a href="#">Services</a>
+				<ul class="submenu">
+					<li><a href="#">Web Development</a></li>
+					<li class="submenu-item">
+						<a href="#">Graphic Design</a>
+						<ul class="submenu">
+							<li><a href="#">Logo Design</a></li>
+							<li><a href="#">UI/UX Design</a></li>
+						</ul>
+					</li>
+					<li><a href="#">SEO</a></li>
+				</ul>
+			</li>
+			<li><a href="#">About</a></li>
+			<li class="submenu-item">
+				<a href="#">Contact</a>
+				<ul class="submenu">
+					<li><a href="#">Email</a></li>
+					<li><a href="#">Phone</a></li>
+					<li class="submenu-item">
+						<a href="#">Location</a>
+						<ul class="submenu">
+							<li><a href="#">Office</a></li>
+							<li><a href="#">Map</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+
+</html>

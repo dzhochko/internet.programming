@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Дерево ієрархії</title>
+	<style>
+		ul {
+			list-style: none;
+			padding-left: 0;
+		}
+
+		.child {
+			display: none;
+		}
+
+		.child li {
+			padding: 3px 0px 3px 15px;
+		}
+
+		.parent.active>.child {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<ul id="hierarchy">
+		<li class="parent">>fruits
+			<ul class="child">
+				<li>apple</li>
+				<li>pineapple</li>
+				<li>apricot</li>
+				<li>pear</li>
+				<li>lemon</li>
+			</ul>
+		</li>
+		<li class="parent">>vegetables
+			<ul class="child">
+				<li>potatoes</li>
+				<li>beetroot</li>
+				<li>carrots</li>
+				<li>pear</li>
+			</ul>
+		</li>
+	</ul>
+
+	<script>
+		const parents = document.querySelectorAll('.parent');
+
+		parents.forEach(parent => {
+			parent.addEventListener('click', () => {
+				parent.classList.toggle('active');
+			});
+		});
+	</script>
+</body>
+
+</html>

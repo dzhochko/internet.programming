@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 1</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+	<h1>Інформація про студента</h1>
+
+	<p>Прізвище: <span id="lastName"></span></p>
+	<p>Ім'я: <span id="firstName"></span></p>
+	<p>По батькові: <span id="middleName"></span></p>
+
+	<button id="showInfoButton">Показати інформацію</button>
+
+	<script>
+		document.getElementById("showInfoButton").addEventListener("click", function () {
+			var lastName = "Джочко";
+			var firstName = "Остап";
+			var middleName = "Петрович";
+
+			var birthDate = "14.02.2005";
+			var birthPlace = "Івано-Франківськ";
+
+			document.getElementById("lastName").textContent = lastName;
+			document.getElementById("firstName").textContent = firstName;
+			document.getElementById("middleName").textContent = middleName;
+
+			alert("Дата народження: " + birthDate + "\nМісце народження: " + birthPlace);
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: rgb(250, 248, 237);
+	text-align: center;
+	margin-top: 50px;
+}
+
+.header {
+	font-size: 36px;
+	color: rgb(116, 142, 99);
+	margin-top: 20px;
+}
+
+.variant {
+	font-size: 18px;
+	color: rgb(116, 142, 99);
+	margin-top: 20px;
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.link {
+	margin: 10px;
+}
+
+.button {
+	display: block;
+	padding: 10px 20px;
+	background-color: rgb(249, 181, 114);
+	color: rgb(116, 142, 99);
+	border: 1px solid black;
+	border-radius: 8px;
+	text-decoration: none;
+	font-size: 18px;
+}

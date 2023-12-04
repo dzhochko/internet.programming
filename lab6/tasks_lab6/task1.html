@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Form Validation</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #222;
+			color: #fff;
+			margin: 0;
+			padding: 0;
+		}
+
+		form {
+			width: 350px;
+			margin: 50px auto;
+			background-color: #333;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+			font-weight: bold;
+			color: #fff;
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="submit"] {
+			width: calc(100% - 22px);
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #555;
+			border-radius: 5px;
+			background-color: #444;
+			color: #fff;
+			outline: none;
+		}
+
+		input[type="submit"] {
+			background-color: #4caf50;
+			color: #fff;
+			border: none;
+			cursor: pointer;
+		}
+
+		.invalid {
+			border-color: #ff4d4d !important;
+		}
+
+		.valid {
+			border-color: #5cb85c !important;
+		}
+
+		.message {
+			display: none;
+			color: #ff4d4d;
+			margin-top: -12px;
+			margin-bottom: 10px;
+		}
+
+		.valid .message {
+			display: block;
+			color: #5cb85c;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="myForm">
+		<label for="email">E-mail:</label>
+		<input type="text" id="email" name="email">
+		<div class="message" id="emailMessage">*Invalid email format</div>
+
+		<label for="fullName">Full Name:</label>
+		<input type="text" id="fullName" name="fullName">
+		<div class="message" id="fullNameMessage">*Invalid name format</div>
+
+		<label for="login">Login:</label>
+		<input type="text" id="login" name="login">
+		<div class="message" id="loginMessage">*Invalid login format</div>
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password">
+		<div class="message" id="passwordMessage">*Invalid password format</div>
+
+		<label for="postalCode">Postal Code:</label>
+		<input type="text" id="postalCode" name="postalCode">
+		<div class="message" id="postalCodeMessage">*Invalid postal code format</div>
+
+		<input type="submit" value="Submit">
+	</form>
+
+	<script>
+		const form = document.getElementById('myForm');
+
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
+
+			const email = document.getElementById('email');
+			const fullName = document.getElementById('fullName');
+			const login = document.getElementById('login');
+			const password = document.getElementById('password');
+			const postalCode = document.getElementById('postalCode');
+
+			const emailPattern = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+			const namePattern = /^([A-Z][a-z]+ [A-Z]+[a-z]+)$/;
+			const loginPattern = /^[a-zA-Z]+$/;
+			const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[-_!@#$%^&*])[A-Za-z\d-_!@#$%^&*]{8,}$/;
+			const postalCodePattern = /^\d{5}$/;
+
+			const validateField = (field, pattern) => {
+				if (!pattern.test(field.value)) {
+					field.classList.remove('valid');
+					field.classList.add('invalid');
+					document.getElementById(`${field.id}Message`).style.display = 'block';
+				} else {
+					field.classList.remove('invalid');
+					field.classList.add('valid');
+					document.getElementById(`${field.id}Message`).style.display = 'none';
+				}
+			};
+
+			validateField(email, emailPattern);
+			validateField(fullName, namePattern);
+			validateField(login, loginPattern);
+			validateField(password, passwordPattern);
+			validateField(postalCode, postalCodePattern);
+		});
+	</script>
+</body>
+
+</html>

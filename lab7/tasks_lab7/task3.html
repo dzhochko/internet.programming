@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Регулярні вирази</title>
+	<script>
+		function toCamelCase() {
+			let inputVariables = ["my_variable", "new_brand_product"];
+			let outputVariables = inputVariables.map(variable => {
+				return variable.replace(/_([a-z])/g, (match, p1) => p1.toUpperCase());
+			});
+
+			document.getElementById('inputArray').textContent = JSON.stringify(inputVariables);
+			document.getElementById('outputArray').textContent = JSON.stringify(outputVariables);
+		}
+
+		function toSnakeCase() {
+			let inputVariables = ["myVariable", "newBrandProduct"];
+			let outputVariables = inputVariables.map(variable => {
+				return variable.replace(/[A-Z]/g, (match) => '_' + match.toLowerCase());
+			});
+
+			document.getElementById('inputArray2').textContent = JSON.stringify(inputVariables);
+			document.getElementById('outputArray2').textContent = JSON.stringify(outputVariables);
+		}
+
+		function formatDate() {
+			let text = document.getElementById('textInput').value;
+			let formattedText = text.replace(/(\d{4})\/(\d{2})\/(\d{2})/g, '$3.$2.$1');
+			document.getElementById('formattedTextResult').textContent = formattedText;
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Регулярні вирази</h1>
+
+	<h2>Lower camel case з Snake case</h2>
+	<p>Вхідний масив: <span id="inputArray"></span></p>
+	<p>Вихідний масив: <span id="outputArray"></span></p>
+	<button onclick="toCamelCase()">Перетворити в Camel Case</button>
+
+	<h2>Snake case з Lower camel case</h2>
+	<p>Вхідний масив: <span id="inputArray2"></span></p>
+	<p>Вихідний масив: <span id="outputArray2"></span></p>
+	<button onclick="toSnakeCase()">Перетворити в Snake Case</button>
+
+	<h2>Заміна дат у тексті</h2>
+	<label for="textInput">Введіть текст:</label>
+	<textarea id="textInput" rows="4" cols="50" placeholder="yyyy/mm/dd"></textarea>
+	<br>
+	<button onclick="formatDate()">Замінити дати</button>
+	<p>Результат: <span id="formattedTextResult"></span></p>
+</body>
+
+</html>

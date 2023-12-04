@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Екранна клавіатура</title>
+	<style>
+		button {
+			margin: 5px;
+		}
+
+		textarea {
+			padding: 10px;
+			resize: none;
+			border: 0;
+			box-shadow: 0px 0px 100px 5px #5e5d5d,
+				0px 0px 10px 5px #5e5d5d inset;
+		}
+	</style>
+</head>
+
+<body>
+	<textarea readonly id="input" cols="30" rows="5"></textarea>
+	<br>
+	<div id="keyboard"></div>
+	<button onclick="clearInput()">Очистити поле</button>
+
+	<script>
+		const ukrainianLetters = [
+			['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ї'],
+			['ф', 'и', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'є'],
+			['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', ',']
+		];
+
+		const keyboard = document.getElementById('keyboard');
+
+		function renderKeyboard() {
+			ukrainianLetters.forEach(row => {
+				const rowDiv = document.createElement('div');
+				rowDiv.classList.add('keyboard-row');
+
+				row.forEach(letter => {
+					const button = document.createElement('button');
+					button.textContent = letter;
+					button.addEventListener('click', () => {
+						document.getElementById('input').value += letter;
+					});
+					rowDiv.appendChild(button);
+				});
+
+				keyboard.appendChild(rowDiv);
+			});
+		}
+
+		function clearInput() {
+			document.getElementById('input').value = '';
+		}
+
+		renderKeyboard();
+	</script>
+</body>
+
+</html>

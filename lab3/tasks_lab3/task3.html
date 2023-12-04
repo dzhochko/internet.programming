@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Екранна клавіатура зі зміною розкладки</title>
+	<style>
+		button {
+			margin: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<textarea id="input" cols="30" rows="5"></textarea>
+	<br>
+	<div id="keyboard"></div>
+	<button onclick="clearInput()">Очистити поле</button>
+	<button onclick="toggleLayout()">Alt+Shift</button>
+
+	<script>
+		const ukrainianLayout = [
+			['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ї'],
+			['ф', 'и', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'є'],
+			['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', ',']
+		];
+
+		const englishLayout = [
+			['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+			['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'],
+			['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.']
+		];
+
+		let currentLayout = 'ukrainian';
+		const keyboard = document.getElementById('keyboard');
+
+		function renderKeyboard(layout) {
+			keyboard.innerHTML = '';
+			const layoutToRender = layout === 'ukrainian' ? ukrainianLayout : englishLayout;
+
+			layoutToRender.forEach(row => {
+				const rowDiv = document.createElement('div');
+				rowDiv.classList.add('keyboard-row');
+
+				row.forEach(letter => {
+					const button = document.createElement('button');
+					button.textContent = letter;
+					button.addEventListener('click', () => {
+						document.getElementById('input').value += letter;
+					});
+					rowDiv.appendChild(button);
+				});
+
+				keyboard.appendChild(rowDiv);
+			});
+		}
+
+		function clearInput() {
+			document.getElementById('input').value = '';
+		}
+
+		function toggleLayout() {
+			currentLayout = currentLayout === 'ukrainian' ? 'english' : 'ukrainian';
+			renderKeyboard(currentLayout);
+		}
+
+		renderKeyboard(currentLayout);
+	</script>
+</body>
+
+</html>

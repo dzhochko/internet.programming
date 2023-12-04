@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Функції роботи з рядками</title>
+	<script>
+		function compareStringLengths() {
+			let str1 = document.getElementById('string1').value;
+			let str2 = document.getElementById('string2').value;
+
+			if (str1.length > str2.length) {
+				document.getElementById('stringCompareResult').textContent = '1';
+			} else if (str1.length < str2.length) {
+				document.getElementById('stringCompareResult').textContent = '-1';
+			} else {
+				document.getElementById('stringCompareResult').textContent = '0';
+			}
+		}
+
+		function findCharacterIndexesAndCount() {
+			let str = document.getElementById('stringToSearch').value;
+			let charToFind = document.getElementById('charToFind').value;
+			let indexes = [];
+			let count = 0;
+
+			for (let i = 0; i < str.length; i++) {
+				if (str.charAt(i) === charToFind) {
+					indexes.push(i);
+					count++;
+				}
+			}
+
+			document.getElementById('charIndexesResult').textContent = indexes.join(', ');
+			document.getElementById('charCountResult').textContent = count;
+		}
+
+		function capitalizeFirstLetter() {
+			let str = document.getElementById('stringToCapitalize').value;
+			let capitalizedStr = str.charAt(0).toUpperCase() + str.slice(1);
+			document.getElementById('capitalizedStringResult').textContent = capitalizedStr;
+		}
+
+		function countVowels() {
+			let str = document.getElementById('stringForVowels').value.toLowerCase();
+			let count = 0;
+			const vowels = ['a', 'e', 'i', 'o', 'u'];
+
+			for (let char of str) {
+				if (vowels.includes(char)) {
+					count++;
+				}
+			}
+
+			document.getElementById('vowelCountResult').textContent = count;
+		}
+
+		function checkForSpam() {
+			let str = document.getElementById('stringForSpamCheck').value.toLowerCase();
+			const spamWords = ['100% безкоштовно', 'збільшення продажів', 'тільки сьогодні', 'не видаляйте'];
+			let isSpam = false;
+
+			for (let word of spamWords) {
+				if (str.includes(word)) {
+					isSpam = true;
+					break;
+				}
+			}
+
+			document.getElementById('spamCheckResult').textContent = isSpam ? 'true' : 'false';
+		}
+
+		function truncateString() {
+			let str = document.getElementById('stringToTruncate').value;
+			let maxLength = parseInt(document.getElementById('maxLength').value);
+
+			if (str.length > maxLength) {
+				str = str.substring(0, maxLength - 3) + '...';
+			}
+
+			document.getElementById('truncatedStringResult').textContent = str;
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Функції роботи з рядками</h1>
+
+	<h2>Порівняння довжини рядків</h2>
+	<label for="string1">Рядок 1:</label>
+	<input type="text" id="string1">
+	<label for="string2">Рядок 2:</label>
+	<input type="text" id="string2">
+	<button onclick="compareStringLengths()">Порівняти</button>
+	<p>Результат порівняння: <span id="stringCompareResult"></span></p>
+
+	<h2>Пошук символу в рядку</h2>
+	<label for="stringToSearch">Рядок:</label>
+	<input type="text" id="stringToSearch">
+	<label for="charToFind">Символ:</label>
+	<input type="text" id="charToFind">
+	<button onclick="findCharacterIndexesAndCount()">Знайти</button>
+	<p>Індекси: <span id="charIndexesResult"></span></p>
+	<p>Кількість: <span id="charCountResult"></span></p>
+
+	<h2>Перший символ у верхньому регістрі</h2>
+	<label for="stringToCapitalize">Рядок:</label>
+	<input type="text" id="stringToCapitalize">
+	<button onclick="capitalizeFirstLetter()">Перша літера</button>
+	<p>Результат: <span id="capitalizedStringResult"></span></p>
+
+	<h2>Підрахунок голосних літер</h2>
+	<label for="stringForVowels">Рядок Eng:</label>
+	<input type="text" id="stringForVowels">
+	<button onclick="countVowels()">Порахувати</button>
+	<p>Кількість голосних: <span id="vowelCountResult"></span></p>
+
+	<h2>Перевірка на спам</h2>
+	<label for="stringForSpamCheck">Рядок:</label>
+	<input type="text" id="stringForSpamCheck">
+	<button onclick="checkForSpam()">Перевірити</button>
+	<p>Результат: <span id="spamCheckResult"></span></p>
+
+	<h2>Скорочення рядка</h2>
+	<label for="stringToTruncate">Рядок:</label>
+	<input type="text" id="stringToTruncate">
+	<label for="maxLength">Максимальна довжина:</label>
+	<input type="number" id="maxLength">
+	<button onclick="truncateString()">Скоротити</button>
+	<p>Результат: <span id="truncatedStringResult"></span></p>
+</body>
+
+</html>

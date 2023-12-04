@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script>
+		function calculate() {
+			let x = parseInt(main_form.t_x.value);
+			let y = parseInt(main_form.t_y.value);
+			let result;
+
+			if (x / y > 0) {
+				result = 2 * x * y - 3;
+			} else if (x > 0 && y < 3) {
+				result = x * y / 3;
+			} else {
+				result = 2 * x - 3 * y;
+			}
+
+			main_form.t_result.value = result;
+		}
+	</script>
+</head>
+
+<body>
+	<form id="main_form">
+		x<input type="text" id="t_x" value="10"><br>
+		y<input type="text" id="t_y" value="2"><br>
+		Результат: <input type="text" id="t_result" value=""><br>
+		<input type="button" onClick="calculate();" value="Розрахувати">
+	</form>
+</body>
+
+</html>

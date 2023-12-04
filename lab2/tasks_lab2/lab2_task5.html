@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Console Methods Example</title>
+</head>
+
+<body>
+
+	<script>
+		console.info("This is an informational message.");
+
+		console.warn("This is a warning message.");
+
+		console.error("This is an error message.");
+
+		const exampleObject = { name: "John", age: 30, city: "New York" };
+		console.dir(exampleObject);
+
+		const xmlString = "<root><element>Content</element></root>";
+		console.dirxml(xmlString);
+
+		console.time("myTimer");
+		for (let i = 0; i < 1000000; i++) {
+			Math.sqrt(i);
+		}
+		console.timeEnd("myTimer");
+
+		console.profile("myProfile");
+		for (let i = 0; i < 1000000; i++) {
+			Math.sqrt(i);
+		}
+		console.profileEnd("myProfile");
+
+		let condition = false;
+		console.assert(condition, "This assertion failed!");
+
+		condition = true;
+		console.assert(condition, "This assertion passed!");
+	</script>
+
+</body>
+
+</html>

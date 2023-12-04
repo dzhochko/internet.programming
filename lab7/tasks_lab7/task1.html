@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Функції обробки рядків</title>
+	<script>
+		function reverseSequence() {
+			let sequence = document.getElementById('sequenceInput').value;
+			let reversedSequence = sequence.split('').reverse().join('');
+			document.getElementById('reverseSequenceResult').textContent = reversedSequence;
+		}
+
+		function noZeros() {
+			let numbers = document.getElementById('numbersInput').value.split(',').map(Number);
+			let filteredNumbers = numbers.filter(num => num !== 0);
+			document.getElementById('noZerosResult').textContent = filteredNumbers.join(', ');
+		}
+
+		function reverser() {
+			let text = document.getElementById('textInput').value;
+			let reversedText = text.split('').reverse().join('');
+			document.getElementById('reversedTextResult').textContent = reversedText;
+		}
+
+		function replaceText() {
+			let originalText = "Я не люблю морозиво";
+			let modifiedText = originalText.replace('не люблю', 'люблю не').replace(/ /g, ',');
+			document.getElementById('replaceTextResult').textContent = modifiedText;
+		}
+	</script>
+</head>
+
+<body>
+	<h2>Функція виведення послідовності чисел у зворотньому порядку</h2>
+	<label for="sequenceInput">Введіть послідовність чисел:</label>
+	<input type="text" id="sequenceInput">
+	<button onclick="reverseSequence()">Обернути</button>
+	<p>Результат: <span id="reverseSequenceResult"></span></p>
+
+	<h2>Функція видалення нулів з масиву чисел</h2>
+	<label for="numbersInput">Введіть масив чисел через кому:</label>
+	<input type="text" id="numbersInput">
+	<button onclick="noZeros()">Видалити нулі</button>
+	<p>Результат: <span id="noZerosResult"></span></p>
+
+	<h2>Функція зворотнього відображення тексту</h2>
+	<label for="textInput">Введіть текст:</label>
+	<input type="text" id="textInput">
+	<button onclick="reverser()">Обернути текст</button>
+	<p>Результат: <span id="reversedTextResult"></span></p>
+
+	<h2>Функція заміни слів та заміни пропусків на коми</h2>
+	<button onclick="replaceText()">Замінити</button>
+	<p>Результат: <span id="replaceTextResult"></span></p>
+</body>
+
+</html>

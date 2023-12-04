@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Перевірка таблиці множення</title>
+</head>
+
+<body>
+	<p>Загальний рахунок <span id="score">0</span>% (<span id="correct">0</span> правильних відповідей з 10)</p>
+	<br>
+	<p id="task"></p>
+	<input type="number" id="answer">
+	<button onclick="checkAnswer()">Перевірити</button>
+	<p id="result"></p>
+
+	<script>
+		let score = 0;
+		let correctAnswers = 0;
+		let attempts = 0;
+		let totalQuestions = 10;
+		let correctPercentage = 0;
+		let correctAnswer = 0;
+
+		function generateTask() {
+			const num1 = Math.floor(Math.random() * 10);
+			const num2 = Math.floor(Math.random() * 10);
+			correctAnswer = num1 * num2;
+			document.getElementById('task').textContent = `${num1} × ${num2} = `;
+		}
+
+		function checkAnswer() {
+			const userAnswer = parseInt(document.getElementById('answer').value);
+
+			if (!isNaN(userAnswer)) {
+				attempts++;
+
+				if (userAnswer === correctAnswer) {
+					correctAnswers++;
+					document.getElementById('result').textContent = 'Правильно!';
+				} else {
+					document.getElementById('result').textContent = `Неправильно. Правильна відповідь: ${correctAnswer}`;
+				}
+
+				score = Math.round((correctAnswers / totalQuestions) * 100);
+				document.getElementById('score').textContent = score;
+				document.getElementById('correct').textContent = correctAnswers;
+
+				if (attempts === totalQuestions) {
+					document.getElementById('answer').disabled = true;
+					correctPercentage = Math.round((correctAnswers / totalQuestions) * 100);
+					document.getElementById('result').textContent = `Завдання завершено! Правильних відповідей: ${correctPercentage}%`;
+				} else {
+					generateTask();
+					document.getElementById('answer').value = '';
+				}
+			} else {
+				alert('Будь ласка, введіть число.');
+			}
+		}
+
+		generateTask();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script>
+		let continents = {
+			"Євразія": { density: 137, area: 54272000 },
+			"Африка": { density: 45, area: 30370000 },
+			"Північна Америка": { density: 22, area: 24709000 },
+			"Південна Америка": { density: 25, area: 17891000 },
+			"Австралія": { density: 3, area: 8600000 },
+			"Антарктида": { density: 0.0003, area: 14000000 },
+		};
+
+		function getContinentData() {
+			let inputContinent = document.getElementById("continentInput").value;
+			let continent = continents[inputContinent];
+
+			if (continent) {
+				let population = continent.density * continent.area;
+				document.getElementById("output").textContent = `Густина населення ${inputContinent}: ${continent.density} осіб/км², Площа: ${continent.area} км²`;
+				document.getElementById("output").textContent += `\nНаселення ${inputContinent}: ${population} осіб`;
+			} else {
+				document.getElementById("output").textContent = "Континент не знайдений";
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+		Введіть назву континенту:
+		<input type="text" id="continentInput">
+		<button type="button" onclick="getContinentData()">Вивести інформацію</button>
+		<br>
+		<div id="output"></div>
+	</form>
+</body>
+
+</html>

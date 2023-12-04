@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		.task {
+			margin-bottom: 30px;
+			border: 1px solid #ccc;
+			padding: 15px;
+		}
+
+		h2 {
+			margin-top: 0;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 8px 12px;
+			text-decoration: none;
+			background-color: #007bff;
+			color: #fff;
+			border-radius: 4px;
+		}
+
+		.btn:hover {
+			background-color: #0056b3;
+		}
+
+		#hidden_text {
+			display: none;
+		}
+
+		.hovered_text {
+			border: 1px solid #000;
+		}
+
+		.clicked_attr {
+			border: 1px solid #f00;
+			background-color: #f5f5f5;
+		}
+
+		#imgContainer {
+			position: relative;
+			margin-top: 20px;
+		}
+
+		.img {
+			max-width: 100%;
+			height: auto;
+		}
+
+		#tooltipBox {
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.7);
+			color: #fff;
+			padding: 5px;
+			border-radius: 4px;
+			display: none;
+			bottom: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		form {
+			margin-top: 10px;
+		}
+
+		input[type="text"] {
+			padding: 8px;
+			font-size: 16px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+		}
+
+		button[type="submit"] {
+			padding: 8px 12px;
+			font-size: 16px;
+			border: none;
+			background-color: #007bff;
+			color: #fff;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #0056b3;
+		}
+
+		span {
+			display: block;
+			margin-top: 10px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="task item1 item2 item3">
+		<h3>Завдання 1, 2, 3.1</h3>
+		<a href="#" class="btn"> Натисніть, щоб показати текст </a>
+		<div id="hidden_text" style="user-select: none;">Прихований текст </div>
+		<h2>Завдання 2.2</h2>
+		<h2>два повідомлення створені jquery</h2>
+		<p></p>
+		<p></p>
+	</div>
+	<div class="task item3">
+		<h2>Завдання 3.2</h2>
+		<button id="singleTap">Одинарний клік</button>
+		<button id="doubleTap">Подвійний клік</button>
+		<h2>Завдання 3.3</h2>
+		<button id="displayImage">Показати зображення</button>
+		<div id="imgContainer">
+			<img class="img"
+				src="https://d17lbu6bbzbdc8.cloudfront.net/wp-content/uploads/2023/03/06074420/revelado-o-passado-sombrio-de-zoro-em-one-piece-conheca-a-historia-da-familia-do-espadachim.webp"
+				alt="Зображення">
+			<div id="tooltipBox"></div>
+		</div>
+	</div>
+	<div class="task item4">
+		<h2>Завдання 4</h2>
+		<div>Введіть в текстове поле слово 'right'.</div>
+		<form>
+			<input type="text" id="txtInput" />
+			<button type="submit">Відправити</button>
+		</form>
+		<span></span>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			let $hiddenText = $('#hidden_text');
+			$hiddenText.hide();
+			$('.btn').click(function () {
+				$hiddenText.show(200);
+			});
+
+			$("p:first").text("DOM first!");
+			jQuery("p:last").text("DOM last!");
+
+			$hiddenText.hover(
+				function () {
+					$(this).addClass('hovered_text');
+				},
+				function () {
+					$(this).removeClass('hovered_text');
+				}
+			);
+
+			$hiddenText.bind('click', function () {
+				$(this).addClass('clicked_attr');
+			});
+
+			$hiddenText.bind('dblclick', function () {
+				$(this).removeClass('clicked_attr');
+			});
+
+			$('#singleTap').bind('click', function () {
+				alert('Single Tap');
+			});
+
+			$('#doubleTap').bind('dblclick', function () {
+				alert('Double Tap');
+			});
+
+			let $imageContainer = $('#imgContainer');
+			let $tooltipBox = $('#tooltipBox');
+
+			$imageContainer.hide();
+
+			$('#displayImage').click(function () {
+				$imageContainer.show();
+			});
+
+			$imageContainer.click(function () {
+				$(this).hide();
+			});
+
+			$imageContainer.mouseover(function () {
+				let captionText = "AI Image";
+				$tooltipBox.text(captionText).show();
+			});
+
+			$imageContainer.mouseout(function () {
+				$tooltipBox.hide();
+			});
+
+			$("form").submit(function () {
+				$("span").text("Checking...").show().delay(2000).fadeOut(500);
+				setTimeout(function () {
+					if ($("#txtInput").val() == "right") {
+						$("span").text("Successful!").show();
+						alert('Successful!');
+					} else {
+						$("span").text("Incorrect!").show().fadeOut(1000);
+					}
+				}, 500);
+			});
+		});
+	</script>
+
+</body>
+
+</html>

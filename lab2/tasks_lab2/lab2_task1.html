@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body onLoad="displayDateTime()">
+	<form name="clock">
+		Час:
+		<input type="text" name="time" size="12" value=""><br>
+		Дата:
+		<input type="text" name="date" size="20" value="">
+	</form>
+	<script type="text/javascript">
+		function displayDateTime() {
+			setInterval(updateDateTime, 1000);
+		}
+
+		function updateDateTime() {
+			const now = new Date();
+			const hours = now.getHours();
+			const minutes = now.getMinutes();
+			const seconds = now.getSeconds();
+			const year = now.getFullYear();
+			const month = now.getMonth() + 1;
+			const day = now.getDate();
+
+			const timeStr = `${hours}:${minutes}:${seconds}`;
+			const dateStr = `${year}*${month}*${day}`;
+
+			document.clock.time.value = timeStr;
+			document.clock.date.value = dateStr;
+		}
+	</script>
+</body>
+
+</html>

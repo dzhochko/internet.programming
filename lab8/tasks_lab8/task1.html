@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Таймер з можливістю зміни часу</title>
+</head>
+
+<body>
+	<div id="displaySystemTime"></div>
+	<label for="hoursValue">Години:</label>
+	<input type="number" id="hoursValue" name="hoursValue"><br><br>
+	<label for="minutesValue">Хвилини:</label>
+	<input type="number" id="minutesValue" name="minutesValue"><br><br>
+	<label for="secondsValue">Секунди:</label>
+	<input type="number" id="secondsValue" name="secondsValue"><br><br>
+	<button id="changeTimeBtn">Змінити час</button>
+	<div id="displayChangedTime"></div>
+
+	<script>
+		function showSystemTime() {
+			const systemTime = new Date();
+			document.getElementById("displaySystemTime").innerText = "Поточний час: " + systemTime.toLocaleTimeString();
+		}
+
+		showSystemTime();
+		setInterval(showSystemTime, 500);
+
+		let changedTime = new Date();
+
+		function updateChangedTime() {
+			changedTime.setSeconds(changedTime.getSeconds() + 1);
+			document.getElementById("displayChangedTime").innerText = "Змінений час: " + changedTime.toLocaleTimeString();
+		}
+
+		setInterval(updateChangedTime, 1000);
+
+		const changeTimeButton = document.getElementById('changeTimeBtn');
+		changeTimeButton.addEventListener('click', function () {
+			const inputHours = parseInt(document.getElementById("hoursValue").value) || 0;
+			const inputMinutes = parseInt(document.getElementById("minutesValue").value) || 0;
+			const inputSeconds = parseInt(document.getElementById("secondsValue").value) || 0;
+
+			changedTime.setHours(changedTime.getHours() + inputHours);
+			changedTime.setMinutes(changedTime.getMinutes() + inputMinutes);
+			changedTime.setSeconds(changedTime.getSeconds() + inputSeconds);
+
+			document.getElementById("displayChangedTime").innerText = "Змінений час: " + changedTime.toLocaleTimeString();
+		});
+	</script>
+</body>
+
+</html>

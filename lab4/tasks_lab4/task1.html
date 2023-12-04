@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Тестування на тему "Фрукти"</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		form {
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		h3 {
+			margin-bottom: 5px;
+		}
+
+		input[type="radio"],
+		input[type="checkbox"],
+		select,
+		input[type="text"] {
+			margin-bottom: 10px;
+		}
+
+		input[type="submit"] {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		table th,
+		table td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+
+		table th {
+			background-color: #f2f2f2;
+		}
+
+		table tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>Тестування на тему "Фрукти"</h2>
+
+	<form id="quizForm">
+		<h3>1. Який фрукт червоний?</h3>
+		<input type="radio" name="question1" value="a"> Апельсин<br>
+		<input type="radio" name="question1" value="b"> Яблуко<br>
+		<input type="radio" name="question1" value="c"> Банан<br>
+		<input type="radio" name="question1" value="d"> Ананас<br>
+
+		<h3>2. Який фрукт зелений?</h3>
+		<input type="radio" name="question2" value="a"> Груша<br>
+		<input type="radio" name="question2" value="b"> Мандарин<br>
+		<input type="radio" name="question2" value="c"> Авокадо<br>
+		<input type="radio" name="question2" value="d"> Вишня<br>
+
+		<h3>3. Оберіть смаки, які є у фрукті апельсині:</h3>
+		<input type="checkbox" name="question3[]" value="a"> Солодкий<br>
+		<input type="checkbox" name="question3[]" value="b"> Кислий<br>
+		<input type="checkbox" name="question3[]" value="c"> Гіркий<br>
+		<input type="checkbox" name="question3[]" value="d"> Солоний<br>
+
+		<h3>4. Які фрукти мають кісточки всередині?</h3>
+		<input type="checkbox" name="question4[]" value="a"> Ананас<br>
+		<input type="checkbox" name="question4[]" value="b"> Вишня<br>
+		<input type="checkbox" name="question4[]" value="c"> Манго<br>
+		<input type="checkbox" name="question4[]" value="d"> Кавун<br>
+
+		<h3>5. Які фрукти належать до цитрусових?</h3>
+		<select name="question5[]" multiple>
+			<option value="a">Ківі</option>
+			<option value="b">Мандарин</option>
+			<option value="c">Лимон</option>
+			<option value="d">Ананас</option>
+		</select>
+
+		<h3>6. Які фрукти мають велике кількість вітаміну С?</h3>
+		<select name="question6[]" multiple>
+			<option value="a">Яблуко</option>
+			<option value="b">Груша</option>
+			<option value="c">Апельсин</option>
+			<option value="d">Гранат</option>
+		</select>
+
+		<h3>7. Який фрукт найбільше використовується для створення морозива?</h3>
+		<input type="text" name="question7"><br>
+
+		<br>
+		<input type="submit" value="Завершити тест">
+	</form>
+
+	<script>
+		document.getElementById('quizForm').addEventListener('submit', function (event) {
+			event.preventDefault();
+
+			const formData = new FormData(this);
+			let scores = {};
+
+			scores['question1'] = formData.get('question1') === 'c' ? 1 : 0;
+			scores['question2'] = formData.get('question2') === 'c' ? 1 : 0;
+
+			let totalScore = 0;
+			let results = "<h2>Результати тестування:</h2><table border='1'><tr><th>Запитання</th><th>Бали</th></tr>";
+			for (let question in scores) {
+				totalScore += scores[question];
+				results += `<tr><td>${question}</td><td>${scores[question]}</td></tr>`;
+			}
+			results += "</table><h3>Загальний бал: " + totalScore + " з 7</h3>";
+
+			document.body.innerHTML = results;
+		});
+	</script>
+
+</body>
+
+</html>

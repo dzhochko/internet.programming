@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Перегляд зображень</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		img {
+			width: 700px;
+			height: 700px;
+		}
+	</style>
+</head>
+
+<body>
+	<img id="image" src="" alt="Image">
+	<br>
+	<button onclick="previousImage()">Назад</button>
+	<button onclick="nextImage()">Вперед</button>
+
+	<script>
+		const images = ['../img/1.png', '../img/5.gif', '../img/2.webp', '../img/3.jpg.avif', '../img/4.png',]; // ваші файли зображень
+		let currentImageIndex = 0;
+
+		const imageElement = document.getElementById('image');
+
+		function showImage() {
+			imageElement.src = images[currentImageIndex];
+		}
+
+		function previousImage() {
+			currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+			showImage();
+		}
+
+		function nextImage() {
+			currentImageIndex = (currentImageIndex + 1) % images.length;
+			showImage();
+		}
+
+		showImage();
+	</script>
+</body>
+
+</html>

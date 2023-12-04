@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Завдання 2</title>
+</head>
+
+<body>
+	<h2>Завдання 2.1. Виведення поточної дати, дня тижня і часу:</h2>
+	<button onclick="displayCurrentDateTime()">Виконати</button>
+	<div id="currentDateTime"></div>
+
+	<h2>Завдання 2.2. Виведення дня і номера тижня:</h2>
+	<button onclick="displayDayInfo()">Виконати</button>
+	<div id="dayInfo"></div>
+
+	<h2>Завдання 2.3. Знайти дату N днів назад чи вперед:</h2>
+	<input type="number" id="inputDays" placeholder="Введіть кількість днів">
+	<button onclick="findDate()">Знайти дату</button>
+	<div id="foundDate"></div>
+
+	<h2>Завдання 2.4. Останній день місяця за роком та номером місяця:</h2>
+	<input type="number" id="inputYear" placeholder="Рік">
+	<input type="number" id="inputMonth" placeholder="Номер місяця">
+	<button onclick="getLastDayOfMonth()">Знайти останній день</button>
+	<div id="lastDayOfMonth"></div>
+
+	<h2>Завдання 2.5. Кількість секунд до кінця дня та від початку дня:</h2>
+	<button onclick="getSecondsUntilEndAndFromStart()">Виконати</button>
+	<div id="secondsInfo"></div>
+
+	<h2>Завдання 2.6. Формування об’єкта на основі введеного рядка:</h2>
+	<input type="text" id="inputDateString" placeholder="дд.мм.рррр год:хв">
+	<button onclick="parseInputDateString()">Формувати об’єкт</button>
+	<div id="parsedDate"></div>
+
+	<script>
+		// Завдання 2.1
+		function displayCurrentDateTime() {
+			const currentDate = new Date();
+			const options = {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+				weekday: 'long',
+				hour: '2-digit',
+				minute: '2-digit'
+			};
+			const formattedDate = currentDate.toLocaleDateString('uk-UA', options);
+			document.getElementById('currentDateTime').innerText = `Дата: ${formattedDate}\nЧас: ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+		}
+
+		// Завдання 2.2
+		function getWeekOfMonth(date) {
+			const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+			const offset = (firstDay === 0 ? 7 : firstDay) - 1;
+			const day = date.getDate();
+			return Math.floor((offset + day - 1) / 7) + 1;
+		}
+
+		function getDayInfo(date) {
+			const dayNames = [
+				"неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"
+			];
+			const weekNumber = getWeekOfMonth(date);
+			const dayName = dayNames[date.getDay()];
+			return { weekNumber, dayName };
+		}
+
+		function displayDayInfo() {
+			const currentDate = new Date();
+			const dayInfo = getDayInfo(currentDate);
+			document.getElementById('dayInfo').innerText = `Номер тижня у місяці: ${dayInfo.weekNumber}\nНазва дня тижня: ${dayInfo.dayName}`;
+		}
+
+
+		// Завдання 2.3
+		function findDate() {
+			const inputDays = parseInt(document.getElementById('inputDays').value);
+			const currentDate = new Date();
+			const foundDate = new Date(currentDate);
+			foundDate.setDate(currentDate.getDate() + inputDays);
+
+			const dateDifference = inputDays >= 0 ? 'майбутня' : 'минула';
+			document.getElementById('foundDate').innerText = `Знайдена дата: ${foundDate.toLocaleDateString()}, ${dateDifference} дата`;
+		}
+
+		// Завдання 2.4
+		function getLastDayOfMonth() {
+			const inputYear = parseInt(document.getElementById('inputYear').value);
+			const inputMonth = parseInt(document.getElementById('inputMonth').value);
+			const lastDay = new Date(inputYear, inputMonth, 0).getDate();
+			document.getElementById('lastDayOfMonth').innerText = `Останній день місяця: ${lastDay}`;
+		}
+
+		// Завдання 2.5
+		function getSecondsUntilEndAndFromStart() {
+			const currentDate = new Date();
+			const startOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+			const endOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+			const secondsUntilEndOfDay = Math.floor((endOfDay - currentDate) / 1000);
+			const secondsFromStartOfDay = Math.floor((currentDate - startOfDay) / 1000);
+
+			document.getElementById('secondsInfo').innerText = `Секунд до кінця дня: ${secondsUntilEndOfDay}\nСекунд від початку дня: ${secondsFromStartOfDay}`;
+		}
+
+		// Завдання 2.6
+		function parseInputDateString() {
+			const inputDateString = document.getElementById('inputDateString').value;
+			const currentDate = new Date();
+
+			const inputDateParts = inputDateString.split(' ');
+			const dateParts = inputDateParts[0].split('.');
+			const timeParts = inputDateParts[1].split(':');
+
+			const year = parseInt(dateParts[2]);
+			const month = parseInt(dateParts[1]) - 1;
+			const day = parseInt(dateParts[0]);
+			const hours = parseInt(timeParts[0]);
+			const minutes = parseInt(timeParts[1]);
+
+			const parsedDate = new Date(year, month, day, hours, minutes);
+			const secondsDifference = Math.floor((currentDate - parsedDate) / 1000);
+
+			let result;
+			if (secondsDifference < 60) {
+				result = `${secondsDifference} сек. назад`;
+			} else if (secondsDifference < 3600) {
+				result = `${Math.floor(secondsDifference / 60)} хв. назад`;
+			} else {
+				result = parsedDate.toLocaleString('uk-UA');
+			}
+
+			document.getElementById('parsedDate').innerText = result;
+		}
+	</script>
+</body>
+
+</html>

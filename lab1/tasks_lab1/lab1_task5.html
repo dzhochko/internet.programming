@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script>
+		function calculateSum() {
+			let sum = 0.0;
+			let i = 2;
+			let cur = 0.0;
+
+			let tochnist = 0.001;
+
+			do {
+				let factorial = 1;
+				for (let j = 1; j <= i; j++) {
+					factorial *= j;
+				}
+
+				cur = Math.pow(-1, i) * ((i + 1) / (i - 2)) * (1 / factorial);
+				sum += cur;
+				i++;
+			} while (i <= 6);
+
+			main_form.t_c.value = sum;
+		}
+	</script>
+</head>
+
+<body>
+	<form id="main_form">
+		Результат: <input type="text" id="t_c" value=""><br>
+		<input type="button" onClick="calculateSum();" value="Розрахувати">
+	</form>
+</body>
+
+</html>
